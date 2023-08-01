@@ -7,7 +7,7 @@ type Plus struct{}
 
 // Name returns the name of the role.
 func (Plus) Name() string {
-	return "plus"
+	return "+"
 }
 
 // Chat returns the formatted chat message using the name and message provided.
@@ -17,5 +17,5 @@ func (Plus) Chat(name, message string) string {
 
 // Colour returns the formatted name-Colour using the name provided.
 func (Plus) Colour(name string) string {
-	return text.Colourf("<i><aqua>%s</aqua></i>", name)
+	return text.Colourf("<black>%s</black>", name)
 }
