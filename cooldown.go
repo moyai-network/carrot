@@ -78,6 +78,7 @@ func (c *CoolDown) Remaining() time.Duration {
 // Cancel cancels the Tag.
 func (c *CoolDown) Cancel() {
 	c.c <- struct{}{}
+	c.expiration.Store(time.Time{})
 }
 
 type coolDownData struct {

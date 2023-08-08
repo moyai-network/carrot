@@ -80,4 +80,5 @@ func (t *Tag) C() <-chan struct{} {
 // Cancel cancels the Tag.
 func (t *Tag) Cancel() {
 	t.c <- struct{}{}
+	t.expiration.Store(time.Time{})
 }
