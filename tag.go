@@ -15,8 +15,7 @@ type Tag struct {
 	Tag   TagFunc
 	unTag TagFunc
 
-	c      chan struct{}
-	closed bool
+	c chan struct{}
 }
 
 // NewTag returns a new Tag.
@@ -25,7 +24,7 @@ func NewTag(t TagFunc, f TagFunc) *Tag {
 		Tag:   t,
 		unTag: f,
 
-		c: make(chan struct{}),
+		c: make(chan struct{}, 0),
 	}
 }
 
@@ -44,12 +43,7 @@ func (t *Tag) Set(d time.Duration) {
 	if t.Tag != nil {
 		t.Tag(t)
 	}
-
-	if t.Active() {
-		t.Cancel()
-	}
-	t.c = make(chan struct{})
-	t.closed = false
+	t.Cancel()
 
 	go func() {
 		select {
@@ -58,7 +52,6 @@ func (t *Tag) Set(d time.Duration) {
 				t.unTag(t)
 			}
 		case <-t.c:
-			t.closed = true
 			return
 		}
 	}()
@@ -71,9 +64,7 @@ func (t *Tag) Reset() {
 		t.unTag(t)
 	}
 
-	if t.Active() {
-		t.Cancel()
-	}
+	t.Cancel()
 	t.expiration.Store(time.Time{})
 }
 
@@ -84,8 +75,9 @@ func (t *Tag) C() <-chan struct{} {
 
 // Cancel cancels the Tag.
 func (t *Tag) Cancel() {
-	t.expiration.Store(time.Time{})
-	if !t.closed {
-		close(t.c)
+	if !t.Active() {
+		return
 	}
+	t.expiration.Store(time.Time{})
+	t.c <- struct{}{}
 }

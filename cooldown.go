@@ -15,8 +15,7 @@ type CoolDown struct {
 	set   CoolDownFunc
 	unSet CoolDownFunc
 
-	c      chan struct{}
-	closed bool
+	c chan struct{}
 }
 
 // NewCoolDown returns a new cool-down.
@@ -39,12 +38,7 @@ func (c *CoolDown) Set(d time.Duration) {
 	if c.set != nil {
 		c.set(c)
 	}
-
-	if c.Active() {
-		c.Cancel()
-	}
-	c.c = make(chan struct{}, 0)
-	c.closed = false
+	c.Cancel()
 
 	go func() {
 		select {
@@ -53,7 +47,6 @@ func (c *CoolDown) Set(d time.Duration) {
 				c.unSet(c)
 			}
 		case <-c.c:
-			c.closed = true
 			return
 		}
 	}()
@@ -67,9 +60,7 @@ func (c *CoolDown) Reset() {
 		c.unSet(c)
 	}
 
-	if c.Active() {
-		c.Cancel()
-	}
+	c.Cancel()
 	c.expiration.Store(time.Time{})
 }
 
@@ -80,10 +71,11 @@ func (c *CoolDown) Remaining() time.Duration {
 
 // Cancel cancels the Tag.
 func (c *CoolDown) Cancel() {
-	c.expiration.Store(time.Time{})
-	if !c.closed {
-		close(c.c)
+	if !c.Active() {
+		return
 	}
+	c.expiration.Store(time.Time{})
+	c.c <- struct{}{}
 }
 
 type coolDownData struct {
