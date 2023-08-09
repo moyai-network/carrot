@@ -35,14 +35,14 @@ func (c *CoolDown) Active() bool {
 
 // Set sets the cool-down.
 func (c *CoolDown) Set(d time.Duration) {
+	if c.set != nil {
+		c.set(c)
+	}
+
 	if c.Active() {
 		c.Cancel()
 	}
 	c.c = make(chan struct{}, 0)
-
-	if c.set != nil {
-		c.set(c)
-	}
 
 	go func() {
 		select {
@@ -60,12 +60,12 @@ func (c *CoolDown) Set(d time.Duration) {
 
 // Reset resets the cool-down.
 func (c *CoolDown) Reset() {
-	if c.Active() {
-		c.Cancel()
-	}
-
 	if c.unSet != nil {
 		c.unSet(c)
+	}
+
+	if c.Active() {
+		c.Cancel()
 	}
 	c.expiration.Store(time.Time{})
 }

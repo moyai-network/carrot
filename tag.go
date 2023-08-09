@@ -40,14 +40,15 @@ func (t *Tag) Remaining() time.Duration {
 
 // Set adds a duration to the Tag.
 func (t *Tag) Set(d time.Duration) {
+	if t.Tag != nil {
+		t.Tag(t)
+	}
+
 	if t.Active() {
 		t.Cancel()
 	}
 	t.c = make(chan struct{})
 
-	if t.Tag != nil {
-		t.Tag(t)
-	}
 	go func() {
 		select {
 		case <-time.After(d):
@@ -63,11 +64,12 @@ func (t *Tag) Set(d time.Duration) {
 
 // Reset resets the Tag.
 func (t *Tag) Reset() {
-	if t.Active() {
-		t.Cancel()
-	}
 	if t.unTag != nil {
 		t.unTag(t)
+	}
+
+	if t.Active() {
+		t.Cancel()
 	}
 	t.expiration.Store(time.Time{})
 }
