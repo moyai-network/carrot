@@ -25,5 +25,5 @@ func (Admin) Colour(name string) string {
 
 // Inherits returns the role that this role inherits from.
 func (Admin) Inherits() carrot.Role {
-	return Mod{}
+	return SeniorMod{}
 }

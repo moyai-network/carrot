@@ -223,6 +223,7 @@ func init() {
 
 	Register(Trial{})
 	Register(Mod{})
+	Register(SeniorMod{})
 	Register(Dev{})
 	Register(Admin{})
 	Register(Manager{})
