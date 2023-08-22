@@ -36,7 +36,7 @@ func ByName(name string) (carrot.Role, bool) {
 
 // Staff returns true if the role provided is a staff role.
 func Staff(role carrot.Role) bool {
-	return Tier(role) >= Tier(Mod{}) || role == Operator{}
+	return Tier(role) >= Tier(Trial{}) || role == Operator{}
 }
 
 // Tier returns the tier of a role based on its registration hierarchy.
@@ -221,7 +221,9 @@ func init() {
 	Register(Famous{})
 	Register(Partner{})
 
+	Register(Trial{})
 	Register(Mod{})
+	Register(Dev{})
 	Register(Admin{})
 	Register(Manager{})
 	Register(Owner{})

@@ -15,12 +15,12 @@ func (Admin) Name() string {
 
 // Chat returns the formatted chat message using the name and message provided.
 func (Admin) Chat(name, message string) string {
-	return text.Colourf("<grey>[<dark-aqua>Admin</dark-aqua>]</grey> <dark-aqua>%s</dark-aqua><dark-grey>:</dark-grey> <dark-aqua>%s</dark-aqua>", name, message)
+	return text.Colourf("<grey>[<red>Admin</red>]</grey> <red>%s</red><dark-grey>:</dark-grey> <red>%s</red>", name, message)
 }
 
 // Colour returns the formatted name-Colour using the name provided.
 func (Admin) Colour(name string) string {
-	return text.Colourf("<dark-aqua>%s</dark-aqua>", name)
+	return text.Colourf("<red>%s</red>", name)
 }
 
 // Inherits returns the role that this role inherits from.
