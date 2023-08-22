@@ -7,7 +7,7 @@ type Dev struct{}
 
 // Name returns the name of the role.
 func (Dev) Name() string {
-	return "Dev"
+	return "dev"
 }
 
 // Chat returns the formatted chat message using the name and message provided.
