@@ -4,11 +4,12 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 )
 
 var (
-	baseURL    = "https://discord.com/api/webhooks/%s/%s/"
+	baseURL    = "https://discord.com/api/webhooks/%s/%s"
 	noExtraURL string
 )
 
@@ -43,8 +44,10 @@ func (h Hook) doRequest(method, extraURL string, payload Payload) error {
 	}
 	req.Header.Add("Content-Type", "application/json")
 
-	_, err = http.DefaultClient.Do(req)
+	resp, err := http.DefaultClient.Do(req)
 	fmt.Println(err)
+	b, _ := io.ReadAll(resp.Body)
+	fmt.Println(string(b))
 	return err
 }
 
