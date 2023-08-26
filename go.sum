@@ -58,6 +58,8 @@ github.com/rcrowley/go-bson v0.0.0-20140210180454-771ad044f2d7 h1:5tDKwEzJeWkdWo
 github.com/rcrowley/go-bson v0.0.0-20140210180454-771ad044f2d7/go.mod h1:FXVPMuM5OOrgNuY4YASk0s/cFb2IM/OiAj0vlLp175Y=
 github.com/restartfu/gophig v0.0.0-20230501130741-bd994da592f7 h1:Oa3kviyiNm2nGpK9rAa9gDhUAYoHfaGxMXfWU/VnbrQ=
 github.com/restartfu/gophig v0.0.0-20230501130741-bd994da592f7/go.mod h1:D7jVxkjgnMfJS7w/ctnxZT1uQIx5xNMGRk6wRFXXttY=
+github.com/restartfu/rhookie v0.0.0-20230826174216-b69ee795a37c h1:y03/JS5UIkB6iFeg7u4TxkHmZC5uTfejWhpn3uIAr38=
+github.com/restartfu/rhookie v0.0.0-20230826174216-b69ee795a37c/go.mod h1:PEcSHvmfo/yZ7CevmM5MgCM2UyDyg90z/0As1oAIAuw=
 github.com/rogpeppe/go-internal v1.9.0 h1:73kH8U+JUqXU8lRuOHeVHaa/SZPifC7BkcraZVejAe8=
 github.com/rogpeppe/go-internal v1.9.0/go.mod h1:WtVeX8xhTBvf0smdhujwtBcq4Qrzq/fJaraNFVN+nFs=
 github.com/sandertv/go-raknet v1.12.0 h1:olUzZlIJyX/pgj/mrsLCZYjKLNDsYiWdvQ4NIm3z0DA=

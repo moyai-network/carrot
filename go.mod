@@ -1,6 +1,6 @@
 module github.com/moyai-network/carrot
 
-go 1.20
+go 1.21.0
 
 require (
 	github.com/df-mc/atomic v1.10.0
@@ -27,6 +27,7 @@ require (
 	github.com/kr/pretty v0.3.1 // indirect
 	github.com/muhammadmuzzammil1998/jsonc v1.0.0 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.7 // indirect
+	github.com/restartfu/rhookie v0.0.0-20230826174216-b69ee795a37c // indirect
 	github.com/sandertv/go-raknet v1.12.0 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
 	golang.org/x/crypto v0.5.0 // indirect
