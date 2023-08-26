@@ -15,6 +15,10 @@ func BanPunishment() Punishment {
 	return Punishment{"Ban", banHook}
 }
 
+func UnbanPunishment() Punishment {
+	return Punishment{"Unban", banHook}
+}
+
 func MutePunishment() Punishment {
 	return Punishment{"Mute", muteHook}
 }
