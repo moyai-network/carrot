@@ -23,6 +23,10 @@ func MutePunishment() Punishment {
 	return Punishment{"Mute", muteHook}
 }
 
+func UnMutePunishment() Punishment {
+	return Punishment{"Unmute", muteHook}
+}
+
 func OomphPunishment() Punishment {
 	return Punishment{"Oomph", oomphHook}
 }
