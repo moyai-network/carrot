@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io"
 	"net/http"
 )
 
@@ -37,17 +36,13 @@ func (h Hook) doRequest(method, extraURL string, payload Payload) error {
 		return err
 	}
 
-	fmt.Println(fmt.Sprintf(baseURL, h.id, h.token) + extraURL)
 	req, err := http.NewRequest(method, fmt.Sprintf(baseURL, h.id, h.token)+extraURL, &buf)
 	if err != nil {
 		return err
 	}
 	req.Header.Add("Content-Type", "application/json")
 
-	resp, err := http.DefaultClient.Do(req)
-	fmt.Println(err)
-	b, _ := io.ReadAll(resp.Body)
-	fmt.Println(string(b))
+	_, err = http.DefaultClient.Do(req)
 	return err
 }
 
