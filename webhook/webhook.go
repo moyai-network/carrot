@@ -36,7 +36,7 @@ func (h Hook) doRequest(method, extraURL string, payload Payload) error {
 		return err
 	}
 
-	fmt.Println(buf.String())
+	fmt.Println(fmt.Sprintf(baseURL, h.id, h.token) + extraURL)
 	req, err := http.NewRequest(method, fmt.Sprintf(baseURL, h.id, h.token)+extraURL, &buf)
 	if err != nil {
 		return err
@@ -44,6 +44,7 @@ func (h Hook) doRequest(method, extraURL string, payload Payload) error {
 	req.Header.Add("Content-Type", "application/json")
 
 	_, err = http.DefaultClient.Do(req)
+	fmt.Println(err)
 	return err
 }
 
